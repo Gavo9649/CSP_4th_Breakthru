@@ -29,6 +29,7 @@ def platform_color():
 def ball_color():
   ball_turtle.color(colors[random.randint(0, 5)])
 
+
 def start_game():
     global running
     running = True
@@ -47,6 +48,29 @@ for life in range(lives):
   my_lives.append(life)
   life.goto(life_x, life_y)
   life_x += 25
+
+
+
+Bricks = 13
+
+
+Brick_x= -272
+Brick_y = 105
+for brick in range(Bricks):
+  brick = trtl.Turtle(shape='square')
+  brick.turtlesize(stretch_len=2)
+  brick.speed(0), brick.penup()
+  my_bricks_r1.append(brick)
+  brick.goto(Brick_x, Brick_y)
+  Brick_x += 45
+
+
+
+
+
+
+
+
 
 score = 0
 platform_turtle = trtl.Turtle(shape='square')
