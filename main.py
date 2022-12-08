@@ -5,7 +5,6 @@ import time
 my_bricks_r1 = []
 my_bricks_r2 = []
 my_bricks_r3 = []
-brick_colors = ['red', 'green', 'blue']
 
 colors = ["red", "blue", "green", "orange", "purple", "gold"]
 
@@ -53,11 +52,11 @@ for life in range(lives):
 
 Bricks = 13
 
-
 Brick_x= -272
 Brick_y = 105
 for brick in range(Bricks):
   brick = trtl.Turtle(shape='square')
+  brick.color("red")
   brick.turtlesize(stretch_len=2)
   brick.speed(0), brick.penup()
   my_bricks_r1.append(brick)
@@ -65,9 +64,28 @@ for brick in range(Bricks):
   Brick_x += 45
 
 
+Brick_x2 = -272
+Brick_y2 = 135
+for brick in range(Bricks):
+  brick = trtl.Turtle(shape='square')
+  brick.color("green")
+  brick.turtlesize(stretch_len=2)
+  brick.speed(0), brick.penup()
+  my_bricks_r2.append(brick)
+  brick.goto(Brick_x2, Brick_y2)
+  Brick_x2 += 45
 
 
-
+Brick_x3 = -272
+Brick_y3 = 165
+for brick in range(Bricks):
+  brick = trtl.Turtle(shape='square')
+  brick.color("blue")
+  brick.turtlesize(stretch_len=2)
+  brick.speed(0), brick.penup()
+  my_bricks_r3.append(brick)
+  brick.goto(Brick_x3, Brick_y3)
+  Brick_x3 += 45
 
 
 
@@ -124,7 +142,6 @@ while True:
         ball_vely *= -1
 
     if ball_turtle.ycor() < -200 and ball_turtle.ycor() > -215 and ball_turtle.xcor() < (platform_turtle.xcor() + 50) and ball_turtle.xcor() > (platform_turtle.xcor() - 50):
-        score += 1 # breaking a tile will count as a score, not hitting the platform. This is just proof of concept
         ball_turtle.sety(-200)
 
         ball_vely *= -1
@@ -156,6 +173,30 @@ while True:
             end_game_turtle.setheading(random.randint(0, 360))
             end_game_turtle.forward(random.randint(0, 50))
             
-            
+    
+    for brick in my_bricks_r1:
+      if ball_turtle.xcor() < (brick.xcor() + 30) and ball_turtle.xcor() > (brick.xcor() -30) and ball_turtle.ycor() < (brick.ycor() +20) and ball_turtle.ycor() > (brick.ycor() -20):
+        ball_vely *= -1.01
+        my_bricks_r1.remove(brick)
+        brick.hideturtle()
+        score += 1
+
+    for brick in my_bricks_r2:
+      if ball_turtle.xcor() < (brick.xcor() + 30) and ball_turtle.xcor() > (brick.xcor() -30) and ball_turtle.ycor() < (brick.ycor() +20) and ball_turtle.ycor() > (brick.ycor() -20):
+        ball_vely *= -1.01
+        my_bricks_r2.remove(brick)
+        brick.hideturtle()
+        score += 1
    
+    for brick in my_bricks_r3:
+      if ball_turtle.xcor() < (brick.xcor() + 30) and ball_turtle.xcor() > (brick.xcor() -30) and ball_turtle.ycor() < (brick.ycor() +20) and ball_turtle.ycor() > (brick.ycor() -20):
+        ball_vely *= -1.01
+        my_bricks_r3.remove(brick)
+        brick.hideturtle()
+        score += 1
+    
+    if score == 39:
+      ball_turtle.goto(0, 5000)
+      ball_vely = 1
+
 wn.mainloop()
