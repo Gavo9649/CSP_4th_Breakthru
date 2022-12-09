@@ -124,6 +124,8 @@ wn.onkey(start_game, 'Return')
 while True:
   wn.update()
   while running:
+    print("velx: " + str(ball_velx))
+    print('vely: ' + str(ball_vely))
     wn.update()
     wn.title("Atami Breakthru - Score: " + str(score))
     ball_turtle.goto((ball_turtle.xcor()+ball_velx), (ball_turtle.ycor()+ball_vely))
@@ -183,20 +185,36 @@ while True:
 
     for brick in my_bricks_r2:
       if ball_turtle.xcor() < (brick.xcor() + 30) and ball_turtle.xcor() > (brick.xcor() -30) and ball_turtle.ycor() < (brick.ycor() +20) and ball_turtle.ycor() > (brick.ycor() -20):
-        ball_vely *= -1.01
+        ball_vely *= -1.02
         my_bricks_r2.remove(brick)
         brick.hideturtle()
         score += 1
    
     for brick in my_bricks_r3:
       if ball_turtle.xcor() < (brick.xcor() + 30) and ball_turtle.xcor() > (brick.xcor() -30) and ball_turtle.ycor() < (brick.ycor() +20) and ball_turtle.ycor() > (brick.ycor() -20):
-        ball_vely *= -1.01
+        ball_vely *= -1.03
         my_bricks_r3.remove(brick)
         brick.hideturtle()
         score += 1
     
     if score == 39:
-      ball_turtle.goto(0, 5000)
-      ball_vely = 1
-
+        text_turtle.clear()
+        ball_turtle.hideturtle()
+        platform_turtle.hideturtle()
+        end_game_turtle = trtl.Turtle()
+        end_game_turtle.speed(0), end_game_turtle.penup(), end_game_turtle.goto(0, 100)
+        end_game_turtle.pendown(), end_game_turtle.write("Level Cleared", align='center', font=("Arial", 40, "normal"))
+        end_game_turtle.speed(0), end_game_turtle.penup(), end_game_turtle.goto(0, 50)
+        end_game_turtle.pendown(), end_game_turtle.write("Good job", align='center', font=("Arial", 25, "normal"))
+        end_game_turtle.speed(0), end_game_turtle.penup(), end_game_turtle.goto(0, -200)
+        end_game_turtle.pendown(), end_game_turtle.write("The next level will start soon", align='center', font=("Arial", 15, "normal"))
+        end_game_turtle.penup(), end_game_turtle.goto(0, 0)
+        end_game_turtle.pendown()
+        for i in range(15):
+            end_game_turtle.speed(1)
+            end_game_turtle.pensize(5)
+            end_game_turtle.color(colors[random.randint(0, 5)])  
+            end_game_turtle.setheading(random.randint(0, 360))
+            end_game_turtle.forward(random.randint(0, 50))
+        wn.bye()
 wn.mainloop()
